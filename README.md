@@ -1,6 +1,6 @@
 # RentIn Jabalpur
 
-A focused first version of a student-housing directory: room/PG owners place a vacancy on an interactive map, and students can view its exact location, details, WhatsApp the owner, or open directions.
+A focused first version of a student-housing directory: room/PG owners place a vacancy on an interactive map, and students can view its exact location, details, WhatsApp the owner, or open directions. It is static-first, so opening `index.html` works without Node.js or a development server.
 
 ## What is included
 
@@ -12,13 +12,9 @@ A focused first version of a student-housing directory: room/PG owners place a v
 
 ## Run locally
 
-1. Install Node.js 20 or newer.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env` and set the two Supabase variables.
-4. In the Supabase SQL Editor, run `supabase/migrations/001_create_listings.sql`.
-5. Run `npm run dev`.
+Open `index.html` in any browser. It works with no installation. In demo mode, owner-created vacancies are stored in that browser, so you can test the full flow immediately.
 
-Without the environment variables, the website uses two sample listings so that the interface can still be previewed.
+To make listings live for all students, copy `config.example.js` to `config.js`, add `<script src="config.js"></script>` immediately before `app.js` in `index.html`, and set the two public Supabase values. Never add a service-role key to a website.
 
 ## Deploy
 
@@ -26,7 +22,7 @@ Without the environment variables, the website uses two sample listings so that 
 
 1. Create a project at [Supabase](https://supabase.com/dashboard).
 2. Use the SQL migration above to create the `listings` table and policies.
-3. Get the Project URL and publishable/anon key from **Project Settings → API**.
+3. Get the Project URL and publishable/anon key from **Project Settings → API** and put them in `config.js` as described above.
 
 ### Vercel
 
