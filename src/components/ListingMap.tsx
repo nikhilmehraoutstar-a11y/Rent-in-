@@ -1,4 +1,4 @@
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useEffect } from 'react'
 import type { Listing } from '../types'
 
@@ -12,8 +12,8 @@ export default function ListingMap({ listings, selected, onSelect }: { listings:
   return <MapContainer center={[23.1815, 79.9864]} zoom={12} className="listing-map" scrollWheelZoom>
     <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
     <MapFocus listing={selected} />
-    {listings.map((listing) => <Marker key={listing.id} position={[listing.latitude, listing.longitude]} eventHandlers={{ click: () => onSelect(listing) }}>
+    {listings.map((listing) => <CircleMarker key={listing.id} center={[listing.latitude, listing.longitude]} radius={11} pathOptions={{ color: '#ffffff', fillColor: '#df6345', fillOpacity: 1, weight: 3 }} eventHandlers={{ click: () => onSelect(listing) }}>
       <Popup><strong>{listing.title}</strong><br />{listing.available_beds} bed{listing.available_beds === 1 ? '' : 's'} available<br /><button className="popup-button" onClick={() => onSelect(listing)}>See details</button></Popup>
-    </Marker>)}
+    </CircleMarker>)}
   </MapContainer>
 }
