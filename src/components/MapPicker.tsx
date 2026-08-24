@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from 'react-leaflet'
+import { CircleMarker, MapContainer, TileLayer, useMap, useMapEvents } from 'react-leaflet'
 
 type Coordinates = { latitude: number; longitude: number }
 const jabalpur: [number, number] = [23.1815, 79.9864]
@@ -8,7 +8,7 @@ function ClickHandler({ value, onChange }: { value: Coordinates; onChange: (next
   const map = useMap()
   useEffect(() => { map.setView([value.latitude, value.longitude], map.getZoom()) }, [map, value.latitude, value.longitude])
   useMapEvents({ click(event) { onChange({ latitude: event.latlng.lat, longitude: event.latlng.lng }) } })
-  return <Marker position={[value.latitude, value.longitude]} />
+  return <CircleMarker center={[value.latitude, value.longitude]} radius={10} pathOptions={{ color: '#ffffff', fillColor: '#df6345', fillOpacity: 1, weight: 3 }} />
 }
 
 export default function MapPicker({ value, onChange }: { value: Coordinates; onChange: (next: Coordinates) => void }) {
